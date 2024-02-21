@@ -1,0 +1,36 @@
+public with sharing class BatchableLoggerExample implements Database.Batchable<SObject>, Database.Stateful {
+    private String originalTransactionId;
+    public Database.QueryLocator start(Database.BatchableContext batchableContext) {
+        // Each batchable method runs in a separate transaction
+        // ...so store the first transaction ID to later relate the other transactions
+        this.originalTransactionId = Logger.getTransactionId();
+
+        Logger.info('Starting BatchableLoggerExample');
+        Logger.saveLog();
+
+        // Just as an example, query all accounts
+        return Database.getQueryLocator([SELECT Id, Name, RecordTypeId FROM Account LIMIT 2]);
+    }
+
+    public void execute(Database.BatchableContext batchableContext, List<Account> scope) {
+        // One-time call (per transaction) to set the parent log
+        Logger.setParentLogTransactionId(this.originalTransactionId);
+
+        for (Account account : scope) {
+            // Add your batch job's logic here
+
+            // Then log the result
+            Logger.info('Processed an account record', account);
+        }
+
+        Logger.saveLog();
+    }
+
+    public void finish(Database.BatchableContext batchableContext) {
+        // The finish method runs in yet-another transaction, so set the parent log again
+        Logger.setParentLogTransactionId(this.originalTransactionId);
+
+        Logger.info('Finishing running BatchableLoggerExample');
+        Logger.saveLog();
+    }
+}
