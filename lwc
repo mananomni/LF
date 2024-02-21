@@ -1,0 +1,48 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Hello" icon-name="standard:account">
+       <c-logger></c-logger>
+       <div>Testing Logger framework</div>
+       <lightning-button variant="brand"  label="Button Name" title="Click Me" onclick={handleClick}></lightning-button>
+    </lightning-card>
+
+</template>
+
+
+
+
+// JS
+import { LightningElement } from 'lwc';
+export default class LoggerDemo extends LightningElement {
+    handleClick(){
+        const logger = this.template.querySelector('c-logger');
+
+        logger.error('I am error').addTag('Error');
+        logger.warn('I am warning!').addTag('Warning');
+        logger.info('I am information').addTag('info');
+        logger.debug('I am normal Debug').addTag('Debug');
+        logger.fine('I am fine log').addTag('NotError');
+        logger.finer('I am finer log').addTag('NotError');
+        logger.finest('I am finest log').addTag('NotError');
+
+        logger.saveLog();
+    }
+}
+
+
+// meta
+<?xml version="1.0"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+	<apiVersion>57.0</apiVersion>
+	<isExposed>true</isExposed>
+	<targets>
+		<target>lightning__RecordPage</target>
+		<target>lightning__HomePage</target>
+	</targets>
+</LightningComponentBundle>
+
+
+
+
+
+
+
