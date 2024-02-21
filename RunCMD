@@ -1,0 +1,7 @@
+RunComd
+
+LoggerFrameworkTest.createContact('MaskingAlso','test@emaill.com','9090909090');
+                             
+Database.executeBatch(new BatchableLoggerExample());
+                             
+System.enqueueJob(new QueueableLoggerExample(3)); 
