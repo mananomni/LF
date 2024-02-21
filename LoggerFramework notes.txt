@@ -5,6 +5,7 @@ batch --> example
 queable --> example
 
 What is nebulla logger and why we use it ?
+
 	1. Easily add log entries via Apex, Lightning Components (lwc & aura), Flow & Process Builder to generate 1 consolidate log
 	2. Manage & report on logging data using the Log__c and LogEntry__c objects
 	3. Leverage LogEntryEvent__e platform events for real-time monitoring & integrations
@@ -13,6 +14,8 @@ What is nebulla logger and why we use it ?
 	6. View related log entries on any Lighting SObject flexipage by adding the 'Related Log Entries' component in App Builder
 	7. Dynamically assign tags to Log__c and LogEntry__c records for tagging/labeling your logs
 
+
+
 We have 4 PS to have access controlled
 
 	1. LoggerLogCreator provides the explicit access to all Apex classes used to generate logs via Apex, Lightning Components, Flow or Process Builder
@@ -20,7 +23,11 @@ We have 4 PS to have access controlled
 	3. LoggerLogViewer provides view-all access (read-only) to all log records. This does not provide access to generate logs.
 	4. LoggerAdmin provides view-all and modify-all access to all log records.
 
+
+
 Configure Logger Custom Setting
+
+
 
 	1.The hierarchy custom settings object LoggerSettings__c is used to control the behavior of several aspects of the logging system. 
 	2.It can be configured at the org, profile, and/or user levels
@@ -30,7 +37,9 @@ Configure Logger Custom Setting
 		LoggingLevel__c = debug --> ERROR,WARN,INFO,DEBUG,FINE,FINER,FINEST
 		DefaultNumberOfDaysToRetainLogs__c = 14 --> Set Log__c.LogRetentionDate__c to keep like kbtk rahega without delete
 
+
 For Masking data(https://github.com/jongpie/NebulaLogger/wiki/Configuring-Data-Mask-Rules)
+
 
 	1. LogEntryDataMaskRule__mdt is used to mask sensitive data like credit card, ssn,aadhar etc.
 	2. Pre-built rules are included for Visa CC, Mastercard CC, and SSN - additional rules can be configured by creating additional LogEntryDataMaskRule__mdt records.
@@ -45,6 +54,7 @@ For Masking data(https://github.com/jongpie/NebulaLogger/wiki/Configuring-Data-M
 
 
 Logging logs in Apex
+
 
 	1. Logger class has several methods , can be used to add entries with different logging levels. Each logging level's method has several overloads to support multiple parameters.
 	
