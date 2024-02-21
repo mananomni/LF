@@ -1,0 +1,27 @@
+public class LoggerFrameworkTest {
+    // Create a logger instance
+    public static void createContact(String name, String email, String phone) {
+        try {
+            // Attempt to create a contact record
+            Contact newContact = new Contact();
+            newContact.FirstName = '';
+            newContact.LastName = name;
+            newContact.Email = email;
+            newContact.Phone = phone;
+            insert newContact;
+            
+            // Log success message with record ID
+            logger.info('Contact created successfully with ID: ' + newContact.Id).addTag('Test Tag');
+            Logger.error('Here is my fake Visa credit card 4000-1111-2222-0004, please don\'t steal it').addTag('data masking rule').addTag('credit card masking');
+			Logger.warn('Here is my fake Mastercard credit card 5000-1111-2222-0005, please don\'t steal it').addTag('data masking rule').addTag('credit card masking');
+        } catch (Exception e) {
+            // Log error message
+            logger.error('An error occurred while creating contact: '+ e.getMessage()).addTag('Exception Tag');
+        } finally {
+            // Log a warning message indicating the completion of the operation
+            logger.warn('Operation completed, regardless of success or failure.').addTag('Test Tag');
+            // Save the log
+            logger.saveLog();
+        }
+    }
+}
